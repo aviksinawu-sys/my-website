@@ -1,0 +1,61 @@
+/* --- 侧边栏整体容器 --- */
+.sidebar {
+    position: fixed;
+    left: -300px;
+    top: 5vh;
+    width: 280px;
+    height: 90vh;
+    background: var(--glass-white);
+    backdrop-filter: blur(25px) saturate(150%);
+    -webkit-backdrop-filter: blur(25px) saturate(150%);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 10px;
+    box-sizing: border-box;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+}
+
+.sidebar.active { left: 30px; }
+
+/* --- 导航链接：这是字体不统一的根源 --- */
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    color: #8a96cc;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+    /* 核心修正：指定和标题一样的优雅字体族 */
+    font-family: 'Cormorant Garamond', serif; 
+    line-height: 1; /* 强制行高为1，防止跳转时文字上下跳动 */
+}
+
+.nav-link.active {
+    background: white;
+    color: var(--main-purple);
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(181, 169, 255, 0.1);
+}
+
+/* 图标大小与间距同步 */
+.nav-link i { 
+    margin-right: 12px; 
+    width: 25px; 
+    text-align: center; 
+    font-size: 14px; 
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    text-align: center;
+    color: var(--main-purple);
+    opacity: 0.5;
+    font-size: 24px;
+    padding-bottom: 20px;
+}

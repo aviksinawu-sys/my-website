@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaeiYn - Photos</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --main-purple: #b5a9ff;
+            --glass-white: rgba(255, 255, 255, 0.2);
+        }
+
+        html, body {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow-x: hidden;
+            background-color: #f0f0ff; 
+        }
+
+        .full-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('背景.png'); 
+            background-size: cover; background-position: center;
+            background-repeat: no-repeat; z-index: -2;
+        }
+
+        /* --- 统一样式：侧边栏 (严格对齐主页) --- */
+        .sidebar {
+            position: fixed; left: -300px; top: 5vh; width: 280px; height: 90vh;
+            background: var(--glass-white);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.4);
+            display: flex; flex-direction: column; padding: 30px 10px;
+            box-sizing: border-box; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+        .sidebar.active { left: 30px; }
+
+        .menu-toggle {
+            position: fixed; top: 40px; left: 40px; width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--main-purple); font-size: 24px; cursor: pointer;
+            z-index: 110; background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%; backdrop-filter: blur(5px);
+        }
+
+        .nav-link {
+            display: flex; align-items: center; padding: 16px 20px;
+            color: #8a96cc; text-decoration: none; border-radius: 20px;
+            margin-bottom: 8px; font-size: 15px; transition: 0.3s;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        /* 这里高亮 Photos */
+        .nav-link.active {
+            background: white; color: var(--main-purple); font-weight: bold;
+            box-shadow: 0 5px 15px rgba(181, 169, 255, 0.1);
+        }
+        .nav-link i { margin-right: 12px; width: 25px; text-align: center; }
+
+        .sidebar-footer {
+            margin-top: auto; text-align: center;
+            color: var(--main-purple); opacity: 0.5; font-size: 24px;
+        }
+
+        /* --- Photos 页面特有：内容区 --- */
+        .content-container {
+            position: relative;
+            z-index: 10;
+            padding: 120px 5% 50px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 50px;
+            color: var(--main-purple); letter-spacing: 5px;
+            margin-bottom: 50px; text-shadow: 0 0 20px white;
+        }
+
+        /* 照片网格布局 */
+        .photo-grid {
+            columns: 3 300px; /* 响应式分栏：最小300px，最多3栏 */
+            column-gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            break-inside: avoid; /* 防止图片跨栏切断 */
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+
+        .photo-item img {
+            width: 100%;
+            display: block;
+            transition: 0.8s;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(181, 169, 255, 0.2);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="full-bg"></div>
+
+    <div class="menu-toggle" onclick="toggleSidebar(event)">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div style="height: 60px;"></div> 
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="events.html" class="nav-link"><i class="fa-solid fa-star"></i>Events & Collab</a>
+        <a href="cosplay.html" class="nav-link"><i class="fa-solid fa-ribbon"></i>Cosplay Works</a>
+        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Handmade</a>
+        <a href="photos.html" class="nav-link active"><i class="fa-solid fa-camera"></i>Photos</a>
+        <div class="sidebar-footer"><i class="fa-solid fa-ribbon"></i></div>
+    </nav>
+
+    <div class="content-container">
+        <h1 class="page-title">Photography Archive</h1>
+        
+        <div class="photo-grid">
+            <div class="photo-item">
+                <img src="照片1.jpg" alt="Photo 1">
+            </div>
+
+            <div class="photo-item">
+                <img src="照片2.jpg" alt="Photo 2">
+            </div>
+
+            <div class="photo-item">
+                <img src="照片3.jpg" alt="Photo 3">
+            </div>
+
+            <div class="photo-item">
+                <img src="照片4.jpg" alt="Photo 4">
+            </div>
+            
+            </div>
+    </div>
+
+    <script>
+        function toggleSidebar(event) {
+            event.stopPropagation();
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

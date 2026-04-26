@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaeiYn - Events & Collab</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --main-purple: #b5a9ff;
+            --glass-white: rgba(255, 255, 255, 0.2);
+        }
+
+        html, body {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow-x: hidden; /* 仅允许纵向滚动 */
+            background-color: #f0f0ff; 
+            /* 2. 确保默认字体一致 */
+            font-family: sans-serif;
+        }
+
+        .full-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('背景.png'); 
+            background-size: cover; background-position: center;
+            background-repeat: no-repeat; z-index: -2;
+        }
+
+  
+
+        /* --- 侧边栏：严格对齐主页参数 --- */
+  .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 5vh;
+            width: 280px;
+            height: 90vh;
+            background: var(--glass-white);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 10px;
+            box-sizing: border-box;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+
+        .sidebar.active { left: 30px; }
+
+        .menu-toggle {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--main-purple);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 110;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .menu-toggle:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            color: #8a96cc;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-link.active {
+            background: white;
+            color: var(--main-purple);
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(181, 169, 255, 0.1);
+        }
+
+        .nav-link i { margin-right: 12px; width: 25px; text-align: center; }
+
+        .sidebar-footer {
+            margin-top: auto;
+            text-align: center;
+            color: var(--main-purple);
+            opacity: 0.5;
+            font-size: 24px;
+        }
+        /* --- 页面内容区 --- */
+        .content-area {
+            margin-top: 120px;
+            padding: 0 10% 100px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif; /* 5. 确保标题字体调用正确 */
+            font-style: italic;
+            font-size: 50px;
+            color: var(--main-purple);
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="full-bg"></div>
+
+    <div class="menu-toggle" onclick="toggleSidebar(event)">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div style="height: 60px;"></div> 
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="events.html" class="nav-link active"><i class="fa-solid fa-star"></i>Events & Collab</a>
+        <a href="cosplay.html" class="nav-link"><i class="fa-solid fa-ribbon"></i>Cosplay Works</a>
+        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Handmade</a>
+        <a href="photos.html" class="nav-link"><i class="fa-solid fa-camera"></i>Photos</a>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-ribbon"></i>
+        </div>
+    </nav>
+
+    <div class="content-area">
+        <h1 class="page-title">Events & Collaborations</h1>
+        </div>
+
+    <script>
+        function toggleSidebar(event) {
+            event.stopPropagation();
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
