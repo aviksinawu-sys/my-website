@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HaeiYn - Visuals</title>
+    <title>HaeiYn - Creative Projects</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -21,6 +21,7 @@
             background-color: #f0f0ff; 
         }
 
+        /* --- 统一样式：背景 --- */
         .full-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('背景.png'); 
@@ -28,7 +29,7 @@
             background-repeat: no-repeat; z-index: -2;
         }
 
-        /* --- 统一样式：侧边栏 (严格对齐主页) --- */
+        /* --- 统一样式：侧边栏 --- */
         .sidebar {
             position: fixed; left: -300px; top: 5vh; width: 280px; height: 90vh;
             background: var(--glass-white);
@@ -57,7 +58,7 @@
             line-height: 1;
         }
 
-        /* 这里高亮 Photos */
+        /* 这里高亮 Cosplay Works */
         .nav-link.active {
             background: white; color: var(--main-purple); font-weight: bold;
             box-shadow: 0 5px 15px rgba(181, 169, 255, 0.1);
@@ -69,11 +70,12 @@
             color: var(--main-purple); opacity: 0.5; font-size: 24px;
         }
 
-        /* --- Photos 页面特有：内容区 --- */
+        /* --- Cosplay 页面特有：内容区 --- */
         .content-container {
             position: relative;
             z-index: 10;
-            padding: 120px 5% 50px;
+            padding: 120px 8% 50px;
+            min-height: 100vh;
             text-align: center;
         }
 
@@ -84,40 +86,53 @@
             margin-bottom: 50px; text-shadow: 0 0 20px white;
         }
 
-        /* 照片网格布局 */
-        .photo-grid {
-            columns: 3 300px; /* 响应式分栏：最小300px，最多3栏 */
-            column-gap: 20px;
-            max-width: 1400px;
+        /* 作品网格布局 */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .photo-item {
-            break-inside: avoid; /* 防止图片跨栏切断 */
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
+        .work-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px);
-            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.4s ease;
             cursor: pointer;
         }
 
-        .photo-item img {
+        .work-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .work-img {
             width: 100%;
-            display: block;
-            transition: 0.8s;
+            height: 350px;
+            background: #eee; /* 图片未加载时的占位色 */
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .photo-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(181, 169, 255, 0.2);
-            background: rgba(255, 255, 255, 0.4);
+        .work-info {
+            padding: 20px;
+            color: #8a96cc;
         }
 
-        .photo-item:hover img {
-            transform: scale(1.05);
+        .work-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .work-info span {
+            font-size: 13px;
+            opacity: 0.8;
         }
 
     </style>
@@ -134,33 +149,40 @@
         <div style="height: 60px;"></div> 
         <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
         <a href="Collaborations & Events.html" class="nav-link"><i class="fa-solid fa-star"></i>Collaborations & Events</a>
-        <a href="Cosplay.html" class="nav-link"><i class="fa-solid fa-ribbon"></i>Creative Projects</a>
-        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Handmade</a>
-        <a href="photos.html" class="nav-link active"><i class="fa-solid fa-camera"></i>Visuals</a>
+        <a href="Cosplay.html" class="nav-link active"><i class="fa-solid fa-ribbon"></i>Creative Projects</a>
+        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Craft & Production</a>
+        <a href="photos.html" class="nav-link"><i class="fa-solid fa-camera"></i>Visuals</a>
         <div class="sidebar-footer"><i class="fa-solid fa-ribbon"></i></div>
     </nav>
 
     <div class="content-container">
-        <h1 class="page-title">Visuals Archive</h1>
+        <h1 class="page-title">Creative Projects</h1>
         
-        <div class="photo-grid">
-            <div class="photo-item">
-                <img src="照片1.jpg" alt="Photo 1">
+        <div class="work-grid">
+            <div class="work-card">
+                <img src="作品1.jpg" alt="Work 1" class="work-img">
+                <div class="work-info">
+                    <h3>Character Name A</h3>
+                    <span>Project Date: 2024</span>
+                </div>
             </div>
 
-            <div class="photo-item">
-                <img src="照片2.jpg" alt="Photo 2">
+            <div class="work-card">
+                <img src="作品2.jpg" alt="Work 2" class="work-img">
+                <div class="work-info">
+                    <h3>Character Name B</h3>
+                    <span>Project Date: 2023</span>
+                </div>
             </div>
 
-            <div class="photo-item">
-                <img src="照片3.jpg" alt="Photo 3">
+            <div class="work-card">
+                <img src="作品3.jpg" alt="Work 3" class="work-img">
+                <div class="work-info">
+                    <h3>Character Name C</h3>
+                    <span>Project Date: 2023</span>
+                </div>
             </div>
-
-            <div class="photo-item">
-                <img src="照片4.jpg" alt="Photo 4">
-            </div>
-            
-            </div>
+        </div>
     </div>
 
     <script>

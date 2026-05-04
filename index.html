@@ -50,17 +50,15 @@
             stroke-linecap: round;
         }
 
-        /* 月亮位置 */
         .moon-icon-wrap {
             position: absolute;
-            top: -15px; /* 根据椭圆弧度微调 */
+            top: -15px;
             color: var(--main-purple);
             font-size: 26px;
             text-shadow: 0 0 10px white;
             z-index: 11;
         }
 
-        /* 英雄标题 */
         .hero-title {
             position: absolute;
             top: 50%; left: 50%;
@@ -77,9 +75,59 @@
             pointer-events: none;
         }
 
-        /* 下方简介内容 */
+        /* --- 环形无限轮播区域 --- */
+        .project-carousel-section {
+            position: absolute;
+            top: 98%; 
+            left: 0;
+            width: 100%;
+            height: 280px;
+            z-index: 12;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            align-items: center;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            /* scroll-snap-type: x mandatory; 如果你希望有强烈的对齐感可以开启 */
+        }
+
+        .project-carousel-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: max-content;
+        }
+
+        .carousel-item {
+            width: 200px;
+            height: 200px;
+            margin: 0;
+            border-radius: 0;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* scroll-snap-align: start; */
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.15);
+            z-index: 20;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- 底部布局 --- */
         .info-container {
-            margin-top: 100vh; 
+            margin-top: 145vh; 
             padding: 80px 20px 120px;
             text-align: center;
             position: relative;
@@ -120,7 +168,7 @@
             font-size: 18px;
         }
 
-        /* 侧边栏 */
+        /* 侧边栏保持不变 */
         .sidebar {
             position: fixed; left: -300px; top: 5vh; width: 280px; height: 90vh;
             background: var(--glass-white);
@@ -152,13 +200,9 @@
 
     <div class="decor-container">
         <svg class="ellipse-svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
-            <path d="M 430 10 
-                     A 380 190 0 1 1 370 10" 
-                  class="ellipse-path" />
+            <path d="M 430 10 A 380 190 0 1 1 370 10" class="ellipse-path" />
         </svg>
-        <div class="moon-icon-wrap">
-            <i class="fa-regular fa-moon"></i>
-        </div>
+        <div class="moon-icon-wrap"><i class="fa-regular fa-moon"></i></div>
     </div>
 
     <div class="menu-toggle" onclick="toggleSidebar(event)">
@@ -168,14 +212,28 @@
     <nav class="sidebar" id="sidebar">
         <div style="height: 60px;"></div> 
         <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i>Home</a>
-        <a href="events.html" class="nav-link"><i class="fa-solid fa-star"></i>Events & Collab</a>
-        <a href="cosplay.html" class="nav-link"><i class="fa-solid fa-ribbon"></i>Cosplay Works</a>
-        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Handmade</a>
-        <a href="photo.html" class="nav-link"><i class="fa-solid fa-camera"></i>Photos</a>
+        <a href="Collaborations & Events.html" class="nav-link"><i class="fa-solid fa-star"></i>Collaborations & Events</a>
+        <a href="Cosplay.html" class="nav-link"><i class="fa-solid fa-ribbon"></i>Creative Projects</a>
+        <a href="handmade.html" class="nav-link"><i class="fa-solid fa-paint-brush"></i>Craft & Production</a>
+        <a href="photo.html" class="nav-link"><i class="fa-solid fa-camera"></i>Visuals</a>
         <div class="sidebar-footer"><i class="fa-solid fa-ribbon"></i></div>
     </nav>
 
     <h1 class="hero-title">HaeiYn</h1>
+
+    <!-- 无限环形轮播 -->
+    <div class="project-carousel-section" id="carouselSection">
+       <div class="carousel-track" id="carouselTrack">
+            <!-- 组1 (用于向左划到底时的衔接) -->
+            <div class="carousel-item"><img src="p1.jpg"></div><div class="carousel-item"><img src="p2.jpg"></div><div class="carousel-item"><img src="p3.jpg"></div><div class="carousel-item"><img src="p4.jpg"></div><div class="carousel-item"><img src="p5.jpg"></div><div class="carousel-item"><img src="p6.jpg"></div><div class="carousel-item"><img src="p7.jpg"></div><div class="carousel-item"><img src="p8.jpg"></div>
+            
+            <!-- 组2 (中间组，用户看到的初始画面) -->
+            <div class="carousel-item"><img src="p1.jpg"></div><div class="carousel-item"><img src="p2.jpg"></div><div class="carousel-item"><img src="p3.jpg"></div><div class="carousel-item"><img src="p4.jpg"></div><div class="carousel-item"><img src="p5.jpg"></div><div class="carousel-item"><img src="p6.jpg"></div><div class="carousel-item"><img src="p7.jpg"></div><div class="carousel-item"><img src="p8.jpg"></div>
+            
+            <!-- 组3 (用于向右划到底时的衔接) -->
+            <div class="carousel-item"><img src="p1.jpg"></div><div class="carousel-item"><img src="p2.jpg"></div><div class="carousel-item"><img src="p3.jpg"></div><div class="carousel-item"><img src="p4.jpg"></div><div class="carousel-item"><img src="p5.jpg"></div><div class="carousel-item"><img src="p6.jpg"></div><div class="carousel-item"><img src="p7.jpg"></div><div class="carousel-item"><img src="p8.jpg"></div>
+        </div>
+    </div>
 
     <div class="info-container">
         <div class="intro-text">
@@ -184,8 +242,8 @@
         </div>
 
         <div class="social-links">
-            <a href="https://www.instagram.com/haeiyn_?igsh=MWw2cG51NTB1cTNjbg%3D%3D&utm_source=qr" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/haeiyn_?s=21&t=6MJEkQIv5Ny45g6rwdf0PQ" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/haeiyn_?" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/haeiyn_?" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://www.tiktok.com/@haeiyn" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
             <a href="https://xhslink.com/a/6zTeWTgzHrK" target="_blank"><i class="fa-solid fa-link"></i></a>
         </div>
@@ -195,19 +253,62 @@
         </a>
     </div>
 
-    <script>
-        function toggleSidebar(event) {
-            event.stopPropagation();
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
+   <script>
+    function toggleSidebar(event) {
+        event.stopPropagation();
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+    }
 
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
+    document.addEventListener('click', function(event) {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
+            sidebar.classList.remove('active');
+        }
+    });
+
+    // --- Ring 无限循环逻辑 ---
+    const section = document.getElementById('carouselSection');
+    const itemWidth = 200;
+    const totalOriginalItems = 8;
+    const groupWidth = itemWidth * totalOriginalItems;
+    let isPaused = false;
+
+    // 1. 初始化位置：跳转到中间那组图
+    section.scrollLeft = groupWidth;
+
+    // 2. 自动播放逻辑
+    function autoMove() {
+        if (isPaused) return;
+        section.scrollBy({ left: 2, behavior: 'auto' }); // 极小步长实现平滑缓慢流动
+    }
+    let autoTimer = setInterval(autoMove, 20); // 50fps 的平滑感
+
+    // 3. 核心：Ring 检测
+    section.addEventListener('scroll', () => {
+        const currentScroll = section.scrollLeft;
+
+        // 如果向右划到了第三组的开头，瞬间跳回中间组的开头
+        if (currentScroll >= groupWidth * 2) {
+            section.scrollLeft = groupWidth;
+        }
+        // 如果向左划到了第一组的末尾，瞬间跳回中间组的末尾
+        if (currentScroll <= 0) {
+            section.scrollLeft = groupWidth;
+        }
+    });
+
+    // 4. 交互：鼠标悬停暂停流动
+    section.addEventListener('mouseenter', () => isPaused = true);
+    section.addEventListener('mouseleave', () => isPaused = false);
+
+    // 5. 点击跳转逻辑（示例：点击任何图跳转到对应页面）
+    const items = document.querySelectorAll('.carousel-item');
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            window.location.href = "Cosplay.html";
         });
-    </script>
+    });
+</script>
 </body>
 </html>
